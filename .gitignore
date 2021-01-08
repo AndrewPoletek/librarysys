@@ -1,2 +1,4 @@
 *.sqlite3
 librarysys/__pycache__/*
+venv/*
+env/*

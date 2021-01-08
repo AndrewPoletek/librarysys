@@ -1,6 +1,9 @@
 from django.shortcuts import render, HttpResponse
+from django.views.generic import View
 
 # Create your views here.
 
-def index(request):
-    return HttpResponse("OK")
+class index(View):
+    def get(self, request):
+        return render(request, template_name='main/base.html')
+        # return HttpResponse("OK")
