@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+{% block 'content' %}
+<div class="container">
+{% if msg_success %}
+<div class="alert alert-success" role="alert">
+  Sukces! Udało się wypożyczyć książkę.
+</div>
+{% endif %}
+{% if msg_error %}
+<div class="alert alert-danger" role="alert">
+  Nie udało się wypożyczyć książki ponieważ: {{msg_error}}
+</div>
+{% endif %}
+<h4>Wypożycz książkę</h4>
+    <div class="mb-3">
+        <form method="post">
+            Wybierz książkę:<br>
+            <select id="books_select" name="book_to_borrow">
+                {% for book in allBooks %}
+                    <option value="{{book.id}}">{{book.title}} / {{book.author}} / {{book.year}} / {{book.isbn}}</option>
+                {% endfor %}
+            </select><br>
+            Wybierz czytelnika:<br>
+            <select id="reader_select" name="reader_to_borrow">
+                {% for reader in allReaders %}
+                    <option value="{{reader.id}}">{{reader.name}} {{reader.surname}} / {{reader.identificator}}</option>
+                {% endfor %}
+            </select><br>
+            Data oddania książki:
+            <input class="form-control" type="date" name="end_date" placeholder="Na ile tygodni?" aria-label="default input example" required>
+            Koszt w przypadku opóźnienia (za dzień)
+            <input class="form-control" type="number" step="0.01" name="cost" value="0.5" aria-label="default input example" required>
+            <button class="btn btn-primary" type="submit">Zapisz</button>
+            {% csrf_token %}
+        </form>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    $('#books_select').select2();
+    $('#reader_select').select2();
+});
+</script>
+{% endblock %}

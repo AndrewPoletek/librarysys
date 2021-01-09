@@ -1,0 +1,81 @@
+{% extends 'main/base.html' %}
+{% block 'content' %}
+<div class="container">
+<h2>Tabela z wypożyczonymi książkami:</h2>
+<table id="borrow_table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>IMIE</th>
+            <th>NAZWISKO</th>
+            <th>ID KSIĄŻKI</th>
+            <th>TYTUŁ</th>
+            <th>AUTOR</th>
+            <th>DATA POCZĄTKOWA</th>
+            <th>DATA KOŃCOWA</th>
+            <th>AKCJA</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for b in allBorrowBooks %}
+        <tr>
+            <td>{{b.id}}</td>
+            <td>{{b.reader.name}}</td>
+            <td>{{b.reader.surname}}</td>
+            <td>{{b.book.id}}</td>
+            <td>{{b.book.title}}</td>
+            <td>{{b.book.author}}</td>
+            <td>{{b.start}}</td>
+            <td>{{b.end}}</td>
+            <td><a href="/returnborrowbooks/{{b.id}}"><button type="button" class="btn btn-primary">Zwróć</button></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Tabela z przeterminowanymi wypożyczeniami:</h2>
+<table id="borrow_delay_table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>IMIE</th>
+            <th>NAZWISKO</th>
+            <th>TELEFON</th>
+            <th>ID KSIĄŻKI</th>
+            <th>TYTUŁ</th>
+            <th>AUTOR</th>
+            <th>DATA POCZĄTKOWA</th>
+            <th>DATA KOŃCOWA</th>
+            <th>ILOŚĆ DNI</th>
+            <th>KOSZT DZIENNY / OSTATECZNY</th>
+            <th>AKCJA</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for key, b in DelayBorrowBooks.items %}
+        <tr>
+            <td>{{b.id}}</td>
+            <td>{{b.reader.name}}</td>
+            <td>{{b.reader.surname}}</td>
+            <td>{{b.reader.phone}}</td>
+            <td>{{b.book.id}}</td>
+            <td>{{b.book.title}}</td>
+            <td>{{b.book.author}}</td>
+            <td>{{b.start}}</td>
+            <td>{{b.end}}</td>
+            <td>{{b.delay_days}}</td>
+            <td>{{b.delay_cost_per_day}} / {{b.delay_cost_calculate}}</td>
+            <td><a href="/returnborrowbooks/{{b.id}}"><button type="button" class="btn btn-primary">Zwróć</button></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+<script>
+$(document).ready(function(){
+    $("#borrow_table").DataTable();
+    $("#borrow_delay_table").DataTable();
+})
+</script>
+{% endblock %}

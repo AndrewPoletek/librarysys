@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+{% block 'content' %}
+<div class="container">
+{% if msg_success %}
+<div class="alert alert-success" role="alert">
+  Sukces! Udało się dodać czytelnika.
+</div>
+{% endif %}
+{% if msg_error %}
+<div class="alert alert-danger" role="alert">
+  Nie udało się dodać czytelnika ponieważ: {{msg_error}}
+</div>
+{% endif %}
+<h4> Dodaj nowego czytelnika</h4>
+    <div class="mb-3">
+        <form method="post">
+            <input class="form-control" type="text" name="name" placeholder="Imię" aria-label="default input example" required>
+            <input class="form-control" type="text" name="surname" placeholder="Nazwisko" aria-label="default input example" required>
+            <input class="form-control" type="text" name="phone_number" placeholder="Numer Telefonu" aria-label="default input example" required>
+            <input class="form-control" type="text" name="address" placeholder="Adres" aria-label="default input example" required>
+            <input class="form-control" type="text" name="town" placeholder="Miasto" aria-label="default input example" required>
+            <input class="form-control" type="text" name="zip_code" placeholder="Kod Pocztowy" aria-label="default input example" required>
+            <input class="form-control" type="text" name="pesel" placeholder="PESEL" aria-label="default input example" required>
+            <button class="btn btn-primary" type="submit">Zapisz</button>
+            {% csrf_token %}
+        </form>
+    </div>
+</div>
+{% endblock %}

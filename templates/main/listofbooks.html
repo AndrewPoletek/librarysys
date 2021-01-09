@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+{% block 'content' %}
+<div class="container">
+<table id="books_table" class="table table-hover">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tytuł</th>
+        <th>Autor</th>
+        <th>ISBN</th>
+        <th>ROK WYDANIA</th>
+        <th>STATUS</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for books in allBooks%}
+        <tr>
+            <td>{{books.id}}</td>
+            <td>{{books.title}}</td>
+            <td>{{books.author}}</td>
+            <td>{{books.isbn}}</td>
+            <td>{{books.year}}</td>
+            <td>{% if books.borrowed %} Wypożyczona {% else %} W bibliotece {% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+<script>
+$(document).ready(function(){
+    $("#books_table").DataTable();
+})
+</script>
+{% endblock %}

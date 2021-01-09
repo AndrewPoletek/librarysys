@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+{% block 'content' %}
+{% if msg_success %}
+<div class="alert alert-success" role="alert">
+  Sukces! Udało się zwrócić książkę.
+</div>
+{% endif %}
+<div class="container">
+<h2> Podsumowanie wypożyczenia</h2>
+<table style="border: 1px solid black;">
+<tr><td style="border: 1px solid black;">ID</td><td style="border: 1px solid black;">{{borrowBook.id}}</td></tr>
+<tr><td style="border: 1px solid black;">IMIE</td><td style="border: 1px solid black;">{{borrowBook.reader.name}}</td></tr>
+<tr><td style="border: 1px solid black;">NAZWISKO</td><td style="border: 1px solid black;">{{borrowBook.reader.surname}}</td></tr>
+<tr><td style="border: 1px solid black;">PESEL</td><td style="border: 1px solid black;">{{borrowBook.reader.identificator}}</td></tr>
+<tr><td style="border: 1px solid black;">ID KSIĄŻKI</td><td style="border: 1px solid black;">{{borrowBook.book.id}}</td></tr>
+<tr><td style="border: 1px solid black;">TYTUŁ</td><td style="border: 1px solid black;">{{borrowBook.book.title}}</td></tr>
+<tr><td style="border: 1px solid black;">AUTOR</td><td style="border: 1px solid black;">{{borrowBook.book.author}}</td></tr>
+<tr><td style="border: 1px solid black;">DATA POCZĄTKOWA</td><td style="border: 1px solid black;">{{borrowBook.start}}</td></tr>
+<tr><td style="border: 1px solid black;">DATA KOŃCOWA</td><td style="border: 1px solid black;">{{borrowBook.end}}</td></tr>
+{% if delay %}
+    <tr><td style="border: 1px solid black;">ILOŚĆ DNI PO ZA WYPOŻYCZENIEM</td><td style="border: 1px solid black;">{{ delay_days }}</td></tr>
+    <tr><td style="border: 1px solid black;">KARA ZA DOBĘ</td><td style="border: 1px solid black;">{{borrowBook.delay_cost}}</td></tr>
+    <tr><td style="border: 1px solid black;">KOSZT OSTATECZNY</td><td style="border: 1px solid black;">{{end_cost}}</td></tr>
+{% endif %}
+</table>
+<form method="POST">
+<input type="hidden" value="{{borrowBook.id}}">
+<button type="submit" class="btn btn-primary">Akceptuj</button>
+{% csrf_token %}
+</form>
+</div>
+{% endblock %}
