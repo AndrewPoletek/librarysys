@@ -1,8 +1,9 @@
 {% extends 'main/base.html' %}
 {% block 'content' %}
 {% if msg_success %}
+<meta http-equiv="refresh" content="3;url={% url 'list_borrow_books' %}" />
 <div class="alert alert-success" role="alert">
-  Sukces! Udało się zwrócić książkę.
+  Sukces! Udało się zwrócić książkę. Za chwilę zostaniesz przekierowany do listy wypożyczonych książek.
 </div>
 {% endif %}
 <div class="container">

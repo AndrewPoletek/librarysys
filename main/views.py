@@ -166,3 +166,10 @@ class returnBorrowBook(View):
             delay_days= days.days
             end_cost = borrowBook.delay_cost*delay_days
         return render(request, 'main/returnborrowbook.html', {'borrowBook': borrowBook, 'delay': delay, 'delay_days': delay_days, 'end_cost':end_cost, 'msg_success': msg_success})
+
+
+class listHistoryBorrowBooks(View):
+    def get(self, request):
+        today = datetime.now()
+        allHistoryBorrowBooks = BorrowBook.objects.filter(returned=True)
+        return render(request, 'main/listhistoryborrowbooks.html',{'allHistoryBorrowBooks': allHistoryBorrowBooks,})

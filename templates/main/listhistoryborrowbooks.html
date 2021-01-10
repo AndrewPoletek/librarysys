@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+{% block 'content' %}
+<div class="container">
+<h4>Tabela z historią wypożyczeń książek:</h4>
+<table id="borrow_table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>IMIE</th>
+            <th>NAZWISKO</th>
+            <th>ID KSIĄŻKI</th>
+            <th>TYTUŁ</th>
+            <th>AUTOR</th>
+            <th>DATA POCZĄTKOWA</th>
+            <th>DATA KOŃCOWA</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for b in allHistoryBorrowBooks %}
+        <tr>
+            <td>{{b.id}}</td>
+            <td>{{b.reader.name}}</td>
+            <td>{{b.reader.surname}}</td>
+            <td>{{b.book.id}}</td>
+            <td>{{b.book.title}}</td>
+            <td>{{b.book.author}}</td>
+            <td>{{b.start}}</td>
+            <td>{{b.end}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+<script>
+$(document).ready(function(){
+    $("#borrow_table").DataTable();
+})
+</script>
+{% endblock %}
