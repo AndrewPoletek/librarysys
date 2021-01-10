@@ -3,6 +3,7 @@ from django.db import IntegrityError
 from django.views.generic import View
 from .models import Book, Reader, BorrowBook
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
